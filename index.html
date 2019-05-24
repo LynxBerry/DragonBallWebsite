@@ -7,11 +7,17 @@
         
         <div id="app">
             <h1>Personal BBS makes life better</h1>
-
+            <ul>
+                <li v-for="msg in posts">
+                    {{msg}}
+                </li>
+            </ul>
+            
+        
+            <textarea v-model="msg"></textarea>
+            <button v-on:click="insertPost(msg)">Post it</button>   
             
         </div>
-
-            
         <script src="index.js"></script>
     </body>
 </html>
