@@ -3,6 +3,19 @@
         <link rel="stylesheet" href="index.css">
         <script data-main="scripts/requirejs.config.js" src="scripts/require.js"></script>
 
+        <script type="text/html" id="view1">
+            <h3 data-bind="text: name"></h3>
+            <p>Count Down: <span data-bind="text: number"></span></p>
+        </script>
+
+        <script type="text/html" id="view2">
+            <ul>
+                <li data-bind="text: fruit[0]"></li>
+                <li data-bind="text: fruit[1]"></li>
+                <li data-bind="text: fruit[2]"></li>
+            </ul>
+        </script>
+
     </head>
     <body>
         <p>First name: <strong data-bind="text: firstName"></strong></p>
@@ -14,5 +27,9 @@
         <p>Full name: <strong data-bind="text: fullName"></strong></p>
 
         <button data-bind="click: capitalizeLastName">Go caps</button>
+        <button data-bind="click: changeView">Change View</button>
+        <div data-bind="text: countDown"></div>
+        <div data-bind="template: currentView"></div>
+
     </body>
 </html>
