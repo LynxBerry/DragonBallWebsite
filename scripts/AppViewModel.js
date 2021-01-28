@@ -29,6 +29,7 @@ define(["knockout"], function(ko) {
         this.isStillLoading = ko.observable(true);
         // this.currentView = ko.observable(this.View1);
         var self = this;
+        /*
         this.currentView = ko.pureComputed(function() {
             if (self.isStillLoading() === true) {
                 console.log("hello world");
@@ -38,6 +39,10 @@ define(["knockout"], function(ko) {
             return self.View2;
 
         });
+        */
+
+        this.currentView = this.View1;
+
 
         this.init = function __init(){
             var self = this;
