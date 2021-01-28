@@ -22,7 +22,7 @@ define(["knockout"], function(ko) {
         this.lastName = ko.observable("Shao");
         this.totalSeconds = 20;
         this.countDown = ko.observable(this.totalSeconds);
-        this.View1 = new View1(this.countDown); // laoding view
+        this.View1 = new View1(this.countDown); // loading view
         this.View2 = new View2();
 
        
@@ -31,6 +31,7 @@ define(["knockout"], function(ko) {
         var self = this;
         this.currentView = ko.pureComputed(function() {
             if (self.isStillLoading() === true) {
+                console.log("hello world");
                 return self.View1;
             }
 
