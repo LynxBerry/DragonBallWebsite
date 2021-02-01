@@ -1,4 +1,4 @@
-define(["knockout"], function(ko) {
+define(["knockout","jquery"], function(ko, $) {
 
     function View1(countDown)
     {
@@ -13,14 +13,14 @@ define(["knockout"], function(ko) {
     function View2()
     {
         this.name = "view2";
-        this.data ={ fruit: ["grape", "waterlemon", "banana"]};
+        this.data = ko.observable({ fruit: ["grape", "waterlemon", "banana"]});
     }
 
 
     return function AppViewModel() {
         this.firstName = ko.observable("Zteven");
         this.lastName = ko.observable("Shao");
-        this.totalSeconds = 20;
+        this.totalSeconds = 2;
         this.countDown = ko.observable(this.totalSeconds);
         this.View1 = new View1(this.countDown); // loading view
         this.View2 = new View2();
@@ -29,7 +29,7 @@ define(["knockout"], function(ko) {
         this.isStillLoading = ko.observable(true);
         // this.currentView = ko.observable(this.View1);
         var self = this;
-        /*
+        
         this.currentView = ko.pureComputed(function() {
             if (self.isStillLoading() === true) {
                 console.log("hello world");
@@ -39,9 +39,9 @@ define(["knockout"], function(ko) {
             return self.View2;
 
         });
-        */
+        
 
-        this.currentView = this.View1;
+        //this.currentView = this.View1;
 
 
         this.init = function __init(){
@@ -50,6 +50,15 @@ define(["knockout"], function(ko) {
                 setTimeout(() => {
                     if (self.countDown() === 0) {
                         self.isStillLoading(false);
+
+                        $.getJSON("fruitlist.json").done((data) => {
+                            self.View2.data(data);
+                        }).fail(() => {
+                            alert("error");
+                        }).always(() => {
+                            alert("complete");
+                        });
+
                     } else {
                         self.countDown(self.countDown() - 1)
                         countDown();
@@ -58,6 +67,8 @@ define(["knockout"], function(ko) {
             };
 
             countDown();
+
+
         };
 
         this.fullName = ko.computed(function() {
